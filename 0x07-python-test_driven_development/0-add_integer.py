@@ -1,11 +1,22 @@
 #!/usr/bin/python3
-"""A function that adds two integers."""
-
-
-def add_integer(a, b=98):
-    """A function that return int(a) + int(b)."""
-    if type(a) is not int and type(a) is not float:
+def add_integer(a: int, b: int = 98) -> int:
+    """
+    Return the sum of two integers a and b.
+    
+    Args:
+        a (int): The first integer.
+        b (int, optional): The second integer. Defaults to 98.
+    
+    Returns:
+        int: The sum of a and b.
+        
+    Raises:
+        TypeError: If a or b is not an integer.
+    """
+    if not isinstance(a, int):
         raise TypeError("a must be an integer")
-    if type(b) is not int and type(b) is not float:
+    if not isinstance(b, int):
         raise TypeError("b must be an integer")
-    return int(a) + int(b)
+    
+    return a + b
+
