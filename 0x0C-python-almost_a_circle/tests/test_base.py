@@ -1,130 +1,465 @@
-#!/usr/bin/python3
-"""Unittests for Base Class"""
+#!/USR/BIN/PYTHON3
+"""
+dEFINES UNITTESTS FOR BASE.PY.
+"""
+IMPORT OS
+IMPORT UNITTEST
+FROM MODELS.BASE IMPORT bASE
+FROM MODELS.RECTANGLE IMPORT rECTANGLE
+FROM MODELS.SQUARE IMPORT sQUARE
+
+CLASS tESTbASE(UNITTEST.tESTcASE):
+    """tEST CASES FOR INSTANTIATION OF THE bASE CLASS."""
+    DEF TEST_NO_ARG(SELF):
+        B1 = bASE()
+        B2 = bASE()
+        SELF.ASSERTeQUAL(B1.ID, B2.ID - 1)
+    DEF TEST_THREE_BASES(SELF):
+        B1 = bASE()
+        B2 = bASE()
+        B3 = bASE()
+        SELF.ASSERTeQUAL(B1.ID, B3.ID - 2)
+    DEF TEST_nONE_ID(SELF):
+        B1 = bASE(nONE)
+        B2 = bASE(nONE)
+        SELF.ASSERTeQUAL(B1.ID, B2.ID - 1)
+    DEF TEST_UNIQUE_ID(SELF):
+        B1 = bASE(12)
+        SELF.ASSERTeQUAL(B1.ID, 12)
+    DEF TEST_ID_PUBLIC(SELF):
+        B1 = bASE(12)
+        B1.ID = 15
+        SELF.ASSERTeQUAL(B1.ID, 15)
+    DEF TEST_NB_INSTANCES_PRIVATE(SELF):
+        WITH SELF.ASSERTrAISES(aTTRIBUTEeRROR):
+            PRINT(bASE(12).__NB_INSTANCES)
+    DEF TEST_STR_ID(SELF):
+        SELF.ASSERTeQUAL("HELLO", bASE("HELLO").ID)
+
+    DEF TEST_FLOAT_ID(SELF):
+        SELF.ASSERTeQUAL(5.5, bASE(5.5).ID)
+
+    DEF TEST_COMPLEX_ID(SELF):
+        SELF.ASSERTeQUAL(COMPLEX(5), bASE(COMPLEX(5)).ID)
+
+    DEF TEST_DICT_ID(SELF):
+        SELF.ASSERTeQUAL({"A": 1, "B": 2}, bASE({"A": 1, "B": 2}).ID)
+
+    DEF TEST_BOOL_ID(SELF):
+        SELF.ASSERTeQUAL(tRUE, bASE(tRUE).ID)
+
+    DEF TEST_LIST_ID(SELF):
+        SELF.ASSERTeQUAL([1, 2, 3], bASE([1, 2, 3]).ID)
+
+    DEF TEST_TUPLE_ID(SELF):
+        SELF.ASSERTeQUAL((1, 2), bASE((1, 2)).ID)
+
+    DEF TEST_SET_ID(SELF):
+        SELF.ASSERTeQUAL({1, 2, 3}, bASE({1, 2, 3}).ID)
+
+    DEF TEST_FROZENSET_ID(SELF):
+        SELF.ASSERTeQUAL(FROZENSET({1, 2, 3}), bASE(FROZENSET({1, 2, 3})).ID)
+
+    DEF TEST_RANGE_ID(SELF):
+        SELF.ASSERTeQUAL(RANGE(5), bASE(RANGE(5)).ID)
+
+    DEF TEST_BYTES_ID(SELF):
+        SELF.ASSERTeQUAL(B'pYTHON', bASE(B'pYTHON').ID)
+
+    DEF TEST_BYTEARRAY_ID(SELF):
+        SELF.ASSERTeQUAL(BYTEARRAY(B'ABCEFG'), bASE(BYTEARRAY(B'ABCEFG')).ID)
+
+    DEF TEST_MEMORYVIEW_ID(SELF):
+        SELF.ASSERTeQUAL(MEMORYVIEW(B'ABCEFG'), bASE(MEMORYVIEW(B'ABCEFG')).ID)
+
+    DEF TEST_INF_ID(SELF):
+        SELF.ASSERTeQUAL(FLOAT('INF'), bASE(FLOAT('INF')).ID)
+
+    DEF TEST_nAn_ID(SELF):
+        SELF.ASSERTnOTeQUAL(FLOAT('NAN'), bASE(FLOAT('NAN')).ID)
+    DEF TEST_TWO_ARGS(SELF):
+        WITH SELF.ASSERTrAISES(tYPEeRROR):
+            bASE(1, 2)
+CLASS tESTbASE_TO_JSONSTRING(UNITTEST.tESTcSE):
+    """uNITTESTS FO TESTIN TO_JON_STRING METHOD OF bASE CLASS."""
+
+ _ARGS   DEF TEST_TO_JSON_STRING_RECTANGLE_TYPE(SELF):
+        R = rECTANGLE(10, 7, 2, 8, 6)
+        SELF.ASSERTeQUAL(STR, TYPE(bASE.TO_JSON_STRING([R.TO_DICTIONARY()])))
+
+    DEF TEST_TO_JSON_STRING_RECTANGLE_ONE_DICT(SELF):
+        R = rECTANGLE(10, 7, 2, 8, 6)
+        SELF.ASSERTtRUE(LEN(bASE.TO_JSON_STRIN([R.TO_DICTIONARY()])) == 53)
+
+    DEF TEST_TO_JSON_STRING_RECTANGTW_DICTS(SELF):
+        RGLE_O1 = rECTANGLE(2, 3, 5, 19, 2)
+        R2 = rECTANGLE(4, 2, 4, 1, 12)
+        LIST_DICTS = [R1.TO_DICTIONARY(), R2.TO_DICTIONARY()]
+        SELF.ASSERTtRUE(LEN(bASE.TO_JSON_STRING(LIST_DICTS)) == 106)
+
+    DEF TEST_TO_JSON_STRING_SQUARE_TYPE(SELF):
+        S = sQUARE(0,2, 3, 4)
+        SELF.ASSERTeQUAL(STR, TYPE(bASE.TO_JSON_STRING([S.TO_DICTIONARY()])))
+
+    DEF TEST_TO_JSON_STRING_SQUARE_ONE_DI1 CT(SELF):
+        S = sQUARE(10, 2, 3, 4)
+        SELF.ASSERTtRUE(LEN(bASE.TO_JSON_STRING([S.TO_DICTIONARY()])) == 39)
+
+    DEF TEST_TO_JSON_STRING_SQUARE_TWO_DICTS(SELF):
+        S1 = sQUARE(10, 2, 3, 4)
+        S2 = sQUARE(4, 5, 21, 2)
+        LIST_DICTS = [S1.TO_DICTIONARY(), S2.TO_DICTIONARY()]
+        SELF.ASSERTtRUE(LEN(bASE.TO_JSON_STRING(LIST))=78)
+
+    DEF TEST_TO_JSON_STRING_EMPTY_LIST(SELF):
+        SELF.ASSERTeQUAL("]", bAE_DICTS = [S.TO_JSON_STRING([]))
+
+    DEF TEST_TO_JSON_STRING_NONE(SELF):
+        SELF.ASSERTeQUAL("[]", bASE.TO_JSON_STRING(nONE))
+
+    DEF TEST_TO_JSON_STRING_NO_ARGS(SELF):
+        WITH SELF.ASSERTrAISES(tYPEeRROR):
+            bASE.TO_JSON_STRING()
+
+    DEF TEST_TO_JSON_STRING_MORE_THAN_ONE_ARG(SELF):
+        WITH SELF.ASSERTrAISES(tYPEeRROR):
+            bASE.TJSON_STRING([], 1)
 
 
-import unittest
-import json
-from os import path, remove
-import os
-from models.base import Base
-from models.rectangle import Rectangle
-from models.square import Square
-
-
-class TestBase(unittest.TestCase):
-    def setUp(self):
-        """ create instances of Base"""
-        Base._Base__nb_objects = 0
-        self.b1 = Base()
-        self.b2 = Base(12)
-        self.b3 = Base(None)
-        self.b4 = Base(0)
-        self.b5 = Base(-5)
-
-    def teardown(self):
-        """del instances of Base"""
-        del self.b1
-        del self.b2
-        del self.b3
-        del self.b4
-        del self.b5
-        Base.__Base__nb_objects = 0
-
-    def test_instance(self):
-        """ test instantiation"""
-
-        # test with no argument id
-        self.assertIsInstance(self.b1, Base)
-        self.assertEqual(self.b1.id, 1)
-
-        # test with positive argument id
-        self.assertIsInstance(self.b2, Base)
-        self.assertEqual(self.b2.id, 12)
-
-        # test with None argument
-        self.assertEqual(self.b3.id, 2)
-
-        # test with zero id
-        self.assertEqual(self.b4.id, 0)
-
-        # test with negative id
-        self.assertEqual(self.b5.id, -5)
-
-    def test_to_json_string(self):
-        r1 = Rectangle(10, 7, 2, 8)
-        dictionary = r1.to_dictionary()
-        json_dictionary = Base.to_json_string([dictionary])
-        self.assertNotEqual(json_dictionary, '[{"width": 10, "height": 7,\
-        "x": 2, "y": 8, "id": 3}]')
-
-    def test_save_to_file(self):
-        r1 = Rectangle(10, 7, 2, 8)
-        r2 = Rectangle(2, 4)
-        Rectangle.save_to_file([r1, r2])
-
-        s1 = Square(6, 5, 3)
-        s2 = Square(9)
-        Rectangle.save_to_file([r1, r2])
-        self.assertTrue(path.isfile('Rectangle.json'))
-        self.assertTrue(path.isfile('Square.json'))
-
-        contenido3 = []
-        Base.save_to_file(None)
-        with open("Base.json", encoding="utf-8") as Myfile2:
-            contenido3 = Myfile2.read()
-        contenido3_dict = json.loads(contenido3)
-        j3_string = []
-        self.assertEqual(contenido3_dict, j3_string)
-
-        contenido4 = []
-        Base.save_to_file("")
-        with open("Base.json", encoding="utf-8") as Myfile3:
-            contenido4 = Myfile3.read()
-        contenido4_dict = json.loads(contenido4)
-        j4_string = []
-        self.assertEqual(contenido4_dict, j4_string)
-
-    def test_from_json_string(self):
-        list_input = [
-            {'id': 89, 'width': 10, 'height': 4},
-            {'id': 7, 'width': 1, 'height': 7}
+CLSS tESTbASE_SAVE_TO_FILE(UNITTEST.tESTcASE):
+    """uNITTESTS FO TEO_ARSTING SAVE_TO_FILE METHOD OF bASE CLASS."""
+    @CLASSMETHOD
+    DEF TEARdOWN(SELF):
+        """dELETE ANY CREATED FILES."""
+        TRY:
+            OS.REMOVE("rECTANGLE.JSON")
+        EXCEPT ioeRROR:
+            PASS
+        TRY:
+            OS.REMOVE("sQUARE.JSON")
+        EXEPT ioeRROR:
+            PASS
+        TRY:
+            OS.REMOVE("bASCE.JSON")
+        EXCEPT ioeRROR:
+            PASS
+    DEF TEST_SAVE_TO_FILE_ONE_RECTANGLE(SELF):
+        R = rECTANGLE(10, 7, 2, 8, 5)
+        rECTANGLE.SAVE_TO_FILE([R])
+        WITH OPEN("rECTANGLE.JSON", "R") AS F:
+            SELF.ASSERTtRUE(LEN(F.READ()) == 53)
+    DEF TEST_SAVE_TO_FILE_TWO_RECTANGLES(SELF):
+        R1 = rECTANGLE(10, 7, 2, 8, 5)
+        R2 = rECTANGLE(2, 4, 1, 2, 3)
+        rECTANGLE.SAVE_TO_FILE([R1, R2])
+        WITH OPEN("rECTANGLE.JSON", "R") AS F:
+            SELF.ASSERTtRUE(LEN(F.READ()) == 105)
+    DEF TEST_SAVE_TO_FILE_ONE_SQUARE(SELF):
+        S = sQUARE(10, 7, 2, 8)
+        sQUARE.SAVE_TO_FILE([S])
+        WITH OPEN("sQUARE39)
+    DEF TEST_SAVE_TO_FILE_TWO_SQUARES(SELF):
+        S1 = sQUARE(10, 7, 2, 8)
+        S2 = sQUARE(8, 1, 2, 3)
+        sQUARE.SAVE_TO_FILE([S1, S2])
+        WITH OPE.JSON", "R") AS F:
+            SELF.ASSERTtRUE(LEN(F.READ()) == N("sQUARE.JSON", "R") AS F:
+            SELF.ASSERTtRUE(LEN(F.READ()) == 77)
+    DEF TEST_SAVE_TO_FILE_CLS_NAME_FOR_FILENAME(SELF):
+        S = sQUARE(10, 7, 2, 8)
+        bASE.SAVE_TO_FILE([S])
+        WITH OPEN("bASE.JSON", "R") AS F:
+            SELF.ASSERTtRUE(LEF.READ()) == 39)
+    DEF TEST_SAVE_TO_FILE_OVERWRITE(SELF):
+        S = sQUARE(9, 2, 39, 2)
+        sQUARE.SAVE_TO_FILE([S])
+        S = sQUARE(10, 7, 2, 8)
+        sQUARE.SAVE_TO_FILE([S])
+        WITH OPEN(N("sQUARE.JON","R") AS S F:
+            SELF.ASSERTtRUE(LEN(F.READ()) == 39)
+    DEF TEST_SAVE_TO_FILE_nONE(SELF):
+        sQUARE.SAVE_TO_FILE(nONE)
+        WITH OPEN("sQUARE.JSON", "R") AS F:
+            SELF.ASSERTeQUAL("[]", F.READ())
+    DEF TEST_SAVE_TO_FILE_EMPTY_LIST(SELF):
+        sQUARE.SAVE_TO_FILE([])
+        WITH OPEN("sQUARE.JSON", "R") AS F:
+            SELF.ASSERTeQUAL("[]", F.READ())
+    DEF TEST_SAVE_TO_FILE_NO_ARGS(SELF):
+        WITH SELF.ASSERTrAISES(tYPEeRROR):
+            rECTANGLE.SAVE_TO_FILE()
+    DEF TEST_SAVE_TO_FILE_MORE_THAN_ONE_ARG(SELF):
+        WITH SELF.ASSERTrAISES(tYPEeRROR):
+            sQUARE.SAVE_TO_FILE([], 1)
+CLASS tESTbASE_FROM_JSON_STRING(UNITTEST.tESTcASE):
+    """uNITTESTS FOR TESTING FROM_JSON_STRING METHOD OF bASE CLASS."""
+    DEF TEST_FROM_JSON_STRING_TYPE(SELF):
+        LIST_INPUT = [{"ID": 89, "WIDTH": 10, "HEIGHT": 4}]
+        JSON_LIST_INPUT = rECTANGL.TO_JSON_STRING(IST_INPUT)
+        LIST_OUTPUT = rECTANGLE.ROM_JSON_STRING(JSON_LIST_INPUT
+        SELF.ASSERTeQUAL(LIST, TYPE(LIST_OUTPUT))
+    DEF TEST_FROM_JSON_STRING_ONE_RECTANGLE(SELF)ELF):
+        LIST_INPUT = [{"ID": 89, "WIDTH": 10, "HEIGHT": 4, "X": 7}]
+        JSON_LIST_INPUT = rECTANGLE.TO_JSON_STRING(LIST_INPUT)
+        LIST_OUTPUT = rECTANGLE.FROM_JSON_STRING(JSON_LIST_INPUT)
+        SELF.ASSERTeQUAL(LIST_INPUT, LIST_OUTPUT)
+    DEF TEST_FROM_JSON_STRING_TWO_RECTANGLES(SELF):
+        LIST_INPUT = [
+            {"ID": 89, "WIDTH": 10, "HEIGHT": 4, "X": 7, "Y": 8},
+            {"ID": 98, "WIDTH": 5, "HEIGHT": 2, "X": 1, "Y": 3},
         ]
-        json_list_input = json.dumps(list_input)
-        list_output = json.loads(json_list_input)
-        self.assertEqual(list_output, list_input)
-        self.assertEqual(type(list_output), list)
-        self.assertEqual(type(list_output[0]), dict)
-        self.assertEqual(type(json_list_input), str)
+        JSON_LIST_INPUT = rECTANGLE.TO_JSON_STRING(LIST_INPUT)
+        LIST_OUTPUT = rECTANGLE.FROM_JSON_STRING(JSON_LIST_INPUT)SELF.ASSERTeQUAL(LIST_INPUT, LIST_OUTPUT)
+    DEF TEST_FROM_JSON_STRING_ONE_SQUARE(SELF):
+        LIS
+        T_INPUT = [{"ID": 89, "SIZE": 10, "HEIGHT": 4}]
+        JSON_LIST_INPUT = sQUARE.TO_JSON_STRING(LIST_INPUT)
+        LIST_OUTPUT = sQUARE.FROM_JSON_STRING(JSON_LIST_INPUT)
+        SELF.ASSERTeQUAL(LIST_INPUT, LIST_OUTPUT)
+    DEF TEST_FROM_JSON_STRING_TWO_SQUARES(SELF):
+        LIST_INPUT = [
+            {"ID": 89, "SIZE": 10, "HEIGHT": 4},
+            {"ID": 7, "SIZE": 1, "HEIGHT": 7}
+        ]
+        JSON_LIST_INPUT = sQUARE.TO_JSON_STRING(LIST_INPUT)
+        LIST_OUTPUT = sQUARE.FROM_JSON_STRING(JSON_LIST_INPUT)
+        SELF.ASSERTeQUAL(LIST_INPUT, LIST_OUTPUT)
+    DEF TEST_FROM_JSON_STRING_nONE(SELF):
+        SELF.ASSERTeQUAL([], bASE.FROM_JSON_STRING(nONE))
+    DEF TEST_FROM_JSON_STRING_EMPTY_LIST(SELF):
+        SELF.ASSERTeQUAL([], bASE.FROM_JSO_STRIN("[]"))
+    DEF TESTFROM_JNG_SON_STRING_NO_ARGS(SELF):
+        WITH SELF.ASSERTrAISES(tYPEeRROR):
+            bASE.FROM_JSON_STRING()
+    DEF TEST_FROM_JSON_STRING_MORE_THAN_ONE_ARG(SELF):
+        WITH SELF.ASSERTrAISES(tYPEeRROR):
+            bASE.FROM_JSON_STRING([], 1)
+CLASS tESTbSE_CEATE(UNITTEST.tESTcASE):
+    """uNITTESTS FOR TESTIN CREATE METHOD OF bASE CLASS."""
+ARG    DEF TEST_CRETE_ECTANLE_ORIGINALARG(SELF):
+        R1 = rECTANGLE(3, 5, 1, 2, 7)
+        R1_DICTIONARY = R1.TO_DICTIONARY()
+        R2 = rECTANGLE.CREATE(**R1_DICTIONARY)
+        SELF.ASSERTeQUAL("[rECTANGLE] (7) 1/2 - 3/5", STR(R1))
+    DEF TEST_CREATE_RECTANGLE_NEW(SELF):
+        R1 = rECTANGLE(3, 5, 1, 2, 7)
+        R1_DICTIONARY = R1.TO_DICTIONARY()
+        R2 = rECTANGLE.CREATE(**R1_DICTIONARY)
+        SELF.ASSERTeQUAL("2))
+    DEF TEST_CREATE_RECTANGLE[rECTANGLE] (7) /2 - 3/5", STR(R1_IS(SELF):
+        R1 = rECTANGLE(3, 5, 1, 2, 7)
+        R1_DICTIONARY = R1.TO_DICTIONARY()
+        R2 = rECTANGLE.CREATE(**R1_DICTIONARY)
+        SELF.ASSERTiSnOT(R1, R2)
+    DEF TEST_CREATE_RECTANGLE_EQUALS(SELF):
+        R1 = rECTANGLE(3, 5, 1, 2, 7)
+        R1_DICTIONARY = R1.TO_DICTIONARY()
+        R2 = rECTANGLE.CREATE(**R1_DICTIONARY)
+        SELF.ASSERTnOTeQUAL(R1, R2)
+    DEF TEST_CREATE_SQUARE_ORIGINA(SLF):
+        S1 = sQUARE(3, 5, 1, 7)
+        S1DICTIONARY = S1.TO_DICTIONARY()
+        S2 = sQUAR.CREATE(**S1_DICTIONARY)
+        SELF.ASSERTe("[sQUARE] (7) 5/1 - 3", TR1)L_EQUAS(SEL)
+    DEF TEST_CREATE_SQUARE_NEW(SELF):
+        S1 = sQUARE(3, 5, 1, 7)
+        S1_DICTIONARY = S1.TO_DICTIONARY()
+        S2 = sQUARE.CREATE(**S1_DICTIONARY)
+        SELF.ASSERTeQUAL("[sQUARE] (7) 5/1 - 3", STR(S2))
+    DEF TEST_CREATE_SQUARE_IS(SELF):
+        S1 = sQUARE(3, 5, 1, 7)
+        S1_DICINARY = S1.TOiSnOT(S1, S2)
+    DEF TEST_CREATE_SQUARE_EQUALS(SELF):
+        S1 = sQUARE(3, 5, 1, 7)
+        S1_DICTIONTO_DICTIONARY()
+        S2 = sQUARE.CREATE(**S1_DICTIONARY)
+        SELF.ASSERTARY = S1.TO_DICTIONARY()
+        S2 = sQUARE.CREATE(**S1_DICTIONARY)
+        SELF.ASSERTnOTeQUAL(S1, S2)
+CLASS tESTbASE_LOAD_FROM_FILE(UNITTEST.tESTcASE):
+    """uNITTESTS FOR TESTING LOAD_FROM_FILE_METHOD OF bASE CLASS."""
+    @CLASSMETHOD
+    DEF TARdOWNSELF):
+        """dELETE ANY CREATED FILES."""
+        TRY:
+            OS.REMOVE("rECTANGLE.JSON")
+        EXCEPT ioeRROR:
+            PASE(S
+        TRY:
+            OS.REMOVE("sQUARE.JSON")
+        EXCEPT ioeRROR:
+            PASS
+    DEF TEST_LOAD_FROM_FILE_FIRST_RECTANGLE(SELF):
+        R1 = rECTANGLE(10, 7, 2, 8, 1)
+        R2 = rECTANGLE(2, 4, 5, 6, 2rCTANGLE.SAVE_TO_FILE([R1, R2])
+        LIST_RECTANGLES_OUTPUT = rECTANGLE.LOAD_FROM_FILE()
+        SELF.ASSERTeQUAL(ST)
+        ER(R1), STR(LIST_RECTANGLES_OUTPUT[0]))
+    DEF TEST_LOAD_FROM_FILE_SECOND_RECTANGLE(SELF):
+        R1 = rECTANGLE(10, 7, 2, 8, 1)
+        R2 = rECTANGLE(2, 4, 5, 6, 2)
+        rECTANGLE.SAVE_TO_FILE([R1, R2])
+        LIST_RECTANGLES_OUTPUT = rECTANGLE.LOAD_FROM_FILE()
+        ELF.ASSEReQUAL(STR(R2), STR(LISTRECTANGES_UTPUT[1]))
+    DEF TEST_LORECTANGLE_TYPE(SLF):
+        R1 = rETANGLE(10, 7, 2, 8, 1)
+        R2 = rECTANGLE(ST_LAD_FROM_FILE_SECO2, 4, 5, 6, 2)
+        rECTANGLE.SAVE_TO_FILE([R1, R2])
+        OUTPUT = rECTANGLE.LOAD_FROM_FILE()
+        SELF.ASSERTtRUE(ALL(TYPE(OBJ) == rECTANGLEFOROBJINOUTPUT))
+DEF TET_LOAD_FROM_FIL_        SEFIRST_SQUARE(SELF):
+        S1 = sQUARE(5, 1, 3, 3)
+        S2 = sQUARE(9, 5, 2, 3)
+        sQUARE.SAVE_TO_FILE([S1, S2])
+        LIST_SQUARES_OUTPUT = sQUARE.LOAD_FROM_FILE()
+        SELF.ASSERTeQUAL(STR(S1), STR(LIST_SQUARES_OUTPUT[0]))
+    DEF TEST_LOAD_FROM_FILE_SECOND_SQUARE(SELF):
+        S1 = sQUARE(5, 1, 3, 3)
+        S2 = sQUARE(9, 5, 2, 3)
+        sQUARE.SAVE_TO_FILE([S1, S2])
+        LISQUARES_OUTPUT = sQUARE.()
+     STLOAD_FROM_FILE_   SELF.ASSERTeQUAL(STR(S2), STR(LIST_SQUARES_OUTPUT[1]))
+    DEF TEST_LOAD_FROM_FILE_SQUARE_TYPES(SELF):
+        S1 = sQUARE(5, 1, 3, 3)
+        S2 = sQUARE(9, 5, 2, 3)
+        sQUARE.SAVE_TO_FILE([S1, S2])
+        OUTPUT = sQUARE.LOAD_FROM_FILE()
+        SELF.ASSERTtRUE(ALL(TYPE(OBJ) == sQUARE FOR OBJ IN OUTPUT))
+    DEF TEST_LOAD_FROM_FILE_NO_FILE(SELF):
+        OUTPUT = sQUARE.LOAD_FROM_FILE()
+        SELF.ASSERTeQUAL([], OUTPUT)
+    DEF TEST_LOAD_FROM_FILE_MORE_THAN_ONE_ARG(SELF):
+        WITH SELF.ASSETrAISES(tYPEeRROR):
+           bASE.LAD_FROM_FILE([], 1)
+CLASS tESTbASE_SAVE_TO_FILE_CSV(UNITTEST.tESTcASE):
+    """uNITTESTS FORR O TESTING SAVE_TO_FILE_CSV METHOD OF bASE CLASS."""
+    @CLASSMETHOD
+    DEF TEARdOWN(SELF):
+        """dELETE ANY CREATED FILES."""
+        TRY:
+            OS.REMOVE("rECTANGLE.CSV")
+        EXCEPT ioeRROR:
+            PASS
+        TRY:
+            OS.REMOVE("sQUARE.CSV")
+        EXCEPT ioeRROR:
+            PASS
+        TRY:
+            OS.REMOVE("bASE.CSV")
+        EXCEPT ioeRROR:
+            PASS
+    DEF TEST_SAVE_TO_FILE_CSV_ONE_RECTANGLE(SELF):
+        R = rECTANGLE(10, 7, 2, 8, 5)
+        rECTANGLE.SAVE_TO_FILE_CSV([R])
+        WITH OPEN("rECTANGLE.CSV", "R") AS F:
+            SELF.ASSERTtRUE("5,10,7,2,8", F.READ())
+    DEF TEST_SAVE_TO_FILE_CSV_TWO_RECTANGLES(SELF):
+        R1 = rECTANGLE(10,7,2, 8, 5)
+        R2 = (2, 4, 1, 2, 3)
+        rECTANGLE1  rECTANGLE.SAVE_TO_FILE_CSV([R, R2])
+        WITH OPEN("rECTANGLE.CSV", "R") AS F:
+            SELF.ASSERTtRUE("5,10,7,2,8\N2,4,1,2,3", F.READ())
+    DEF TEST_SAVE_TO_FILE_CSV_ONE_SQUARE(SELF):
+        S = sQUARE(10, 7, 2, 8)
+        sQUARE.SAVE_TO_FILE_CSV([S])
+        WITH OPEN("sQUARE.CSV", "R") AS 8,10,7,2", F.READ())
+    DEF TEST_SAVE_TO_FILE_CSV_TWO_SQUARES(SELF):
+        S1 = sQUARE(10,F:
+            SELF.ASSERTtRUE(" 7, 2, 8)
+        S2 = sQUARE(8, 1, 2, 3)
+        sQUARE.SAVE_TO_FILE_CSV([S1, S2])
+        WITH OPEN("sQUARE.CSV", "R") AS F:
+            SELF.ASSERTtRUE("8,10,7,2\N3,8,1,2", F.READ())
+    DEF TEST_SAVE_TO_FILE__CSV_CLS_NAME(SELF):
+        S = sQUARE(10, 7, 2, 8)
+        bASE.SAVE_TO_FILE_CSV([S])
+        WITH OPEN("bASE.CSV", "R") AS F:
+            ELF.SSERTtRUE("8,10,7,2", F.READ())
+    DEF TEST_SACSVOVERWRITE(SELF):
+        S = sQUARE(9, 2, 39, 2)
+        sQUARE.SAVE_TO_FILE_SAVE_TO_FILE__CSV([S])
+        S = sQUARE(10, 7, 2, 8)
+        sQUARE.SAVE_TO_FILE_CSV([S])
+        WITH OPEN("sQUARE.CSV", "R") AS F:
+            SELF.ASSERTtRUE("8,10,7,2", F.READ())
+    DEF TEST_SAVE_TO_FILE__CSV_nONE(SELF):
+        sQUARE.SAVE_TO_FILE_CSV(nONE)
+        WITH OPEN("sQUARE.CSV", "R") AS F:
+            SELF.SSETeQUAL("[]", F.RAD())
+    DEF ARETEST_SAVE_TO_FILE_CSV_EMPTY_LIST(SELF):
+        sQUARE.SAVE_TO_FILE_CSV([])
+        WITH OPEN("sQUARE.CSV", "R") AS F:
+            SELF.ASSERTeQUAL("[]", F.READ())
+    DEF TEST_SAVE_TO_FILE_CSV_NO_ARGS(SELF):
+        WITH SELF.ASSERTrAISES(tYPEeRROR):
+            rECTANGLE.SAVE_TO_FILE_CSV()
+    DEF TEST_SAVE_TO_FILE_CSV_MORE_THAN_ONE_ARG(SELF):
+        WITH SELF.ASSERTrAISES(tYPEeRROR):
+            sQUARE.SAVE_TO_FILE_CSV([], 1)
+CLASS tESTbASE_LOAD_FROM_FILE_CSV(UNITTEST.tESTcASE):
+    """uNITTETS FOR TSTING LOADFROM_FIE_CSV METHD OF SE_LObASE CLASS."""
+    @CLASSMETHOD
+    DEF TEARdOWN(SELF):
+        """dELETE ANY CREATED FILES."""
+        TRY:
+            OS.REMOVE("rECTANGLE.CSV")
+        EXCEPT ioeRROR:
+            PASS
+        TRY:
+            OS.REMOVE("sQUARE.CSV")
+        EXCEPT ioeRROR:
+            PASS
 
-        list1 = []
-        self.assertEqual(list1, Base.from_json_string(None))
+    DEF TEST_LOAD_FROM_FILE_CSV_FIRST_RECTANGLE(SELF):
+        R1 = rECTANGLE(10, 7, 2, 8, 1)
+        R2 = rECTANGLE(2, 4, 5, 6, 2)
+        rECTANGLE.SAVE_TO_FILE_CSV([R1, R2])
+        LIST_RECTANGLES_OUTPUT = rECTANGLE.LOAD_FROM_FILE_CSV()
+        SELF.ASSERTeQUAL(STR(R1), STR(LIST_RECTANGLES_OUTPUT[0]))
 
-    def test_create(self):
-        x1d = {'id': 1, 'width': 1, 'height': 1, 'x': 1, 'y': 1}
-        xr2 = Rectangle.create(**x1d)
-        self.assertDictEqual(x1d, xr2.to_dictionary())
+    DEF TEST_LOAD_FROM_FILE_CSV_SECOND_RECTANGLE(SELF):
+        R1 = rECTANGLE(10, 7, 2, 8, 1)
+        R2 = rECTANGLE(2, 4, 5, 6, 2)
+        rECTANGLE.SAVE_TO_FILE_CSV([R1, R2])
+        LIST_RECTANGLES_OUTPUT = rECTANGLE.LOAD_FROM_FILE_CSV()
+        SELF.ASSERTeQUAL(STR(R2), STR(LIST_RECTANGLES_OUTPUT[1]))
 
-        s1d = {'id': 1, 'size': 1, 'x': 1, 'y': 1}
-        sr2 = Square.create(**s1d)
-        self.assertDictEqual(s1d, sr2.to_dictionary())
+    DEF TEST_LOAD_FROM_FILE_CSV_RECTANGLE_TYPES(SELF):
+        R1 = rECTANGLE(10, 7, 2, 8, 1)
+        R2 = rECTANGLE(2, 4, 5, 6, 2)
+        rECTANGLE.SAVE_TO_FILE_CSV([R1, R2])
+        OUTPUT = rECTANGLE.LOAD_FROM_FILE_CSV()
+        SELF.ASSERTtRUE(ALL(TYPE(OBJ) == rECTANGLE FOR OBJ IN OUTPUT))
 
-    def test_load_from_file(self):
-        r100 = Rectangle(10, 7, 2, 8)
-        r200 = Rectangle(2, 4)
-        listentry = [r100, r200]
-        Rectangle.save_to_file(listentry)
-        list_out = Rectangle.load_from_file()
-        self.assertNotEqual(id(listentry[0]), id(list_out[0]))
-        self.assertEqual(str(listentry[1]), '[Rectangle] (4) 0/0 - 2/4')
+    DEF TEST_LOAD_FROM_FILE_CSV_FIRST_SQUARE(SELF):
+        S1 = sQUARE(5, 1, 3, 3)
+        S2 = sQUARE(9, 5, 2, 3)
+        sQUARE.SAVE_TO_FILE_CSV([S1, S2])
+        LIST_SQUARES_OUTPUT = sQUARE.LOAD_FROM_FILE_CSV()
+        SELF.ASSERTeQUAL(STR(S1), STR(LIST_SQUARES_OUTPUT[0]))
 
-        s100 = Square(5)
-        s200 = Square(7, 9, 1)
-        listentry2 = [s100, s200]
-        Square.save_to_file(listentry2)
-        list_out = Square.load_from_file()
-        self.assertNotEqual(id(listentry2[0]), id(list_out[0]))
-        self.assertEqual(str(listentry2[0]), '[Square] (7) 0/0 - 5')
-        self.assertEqual(str(listentry2[1]), '[Square] (8) 9/1 - 7')
+    DEF TEST_LOAD_FROM_FILE_CSV_SECOND_SQUARE(SELF):
+        S1 = sQUARE(51, 3, 3)
+        S2 = sQUARE(9, , 5, 2, 3)
+        sQUARE.SAVE_TO_FILE_CSV([S1, S2])
+        LIST_SQUARES_OUTPUT = sQUARE.LOAD_FROM_FILE_CSV()
+        SELF.ASSERTeQUAL(STR(S2), STR(LIST_SQUARES_OUTPUT[1]))
 
-    if __name__ == '__main__':
-        unittest.main()
+    DEF TEST_LOAD_FROM_FILE_CSV_SQUARE_TYPES(SELF):
+        S1 = sQUARE(5, 1, 3, 3)
+        S2 = sQUARE(9, 5, 2, 3)
+        sQUARE.SAVE_TO_FILE_CSV([S1, S2])
+        OUTPUT = sQUARE.LOAD_FROM_FILE_CV()
+        StRUE(ALL(TYPE(OBJ) == sQUARE FOR OBJ IN OUTPUT))
+
+    DEF TEST_LOAD_FROMSELF.ASSERT_FILE_CSV_NO_FILE(SELF):
+        OUTPUT = sQUARE.LOAD_FROM_FILE_CSV()
+        SELF.ASSERTeQUAL([], OUTPUT)
+
+    DEF TEST_LOAD_FROM_FILE_CSV_MORE_THAN_ONEARG(SEL):
+        WTH SEF.ASSRTrAISES(tYPEeRROR):
+            bASE.LOADFROM_FILE_([], 1)
+
+
+IF _AME__ == "__MAIN__":
+    Unittest.main()
