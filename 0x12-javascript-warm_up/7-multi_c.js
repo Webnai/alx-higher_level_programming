@@ -1,5 +1,6 @@
 #!/usr/bin/node
-const arrS = ['C is fun', 'Python is cool', 'JavaScript is amazing'];
-for (let i = 0; i < arrS.length; i++) {
-  console.log(arrS[i]);
+const loveC = 'C is fun';
+const x = process.argv[2];
+for (let i = 0; i < x; i++) {
+  console.log(loveC);
 }
