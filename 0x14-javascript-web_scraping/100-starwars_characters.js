@@ -1,23 +1,21 @@
 #!/usr/bin/node
-// status of a request
-const myRequest = require('request');
-const myUrl = 'http://swapi.co/api/films/' + process.argv[2];
-const myRequest2 = require('request');
-myRequest(myUrl, function (err, res, body) {
-  if (err) {
-    console.log(err);
-  } else {
-    const jsonBody = JSON.parse(body).characters;
-    for (const j in jsonBody) {
-      const chars = jsonBody[j];
-      myRequest2(chars, function (err, res, body2) {
-        if (err) {
-          console.log(err);
-        } else {
-          const actor = JSON.parse(body2).name;
-          console.log(actor);
-        }
-      });
-    }
+
+const req = require('request');
+const id = process.argv[2];
+const url = 'https://swapi-api.hbtn.io/api/films/';
+req.get(url + id, function (error, res, body) {
+  if (error) {
+    console.log(error);
+  }
+  const data = JSON.parse(body);
+  const dd = data.characters;
+  for (const i of dd) {
+    req.get(i, function (error, res, body1) {
+      if (error) {
+        console.log(error);
+      }
+      const data1 = JSON.parse(body1);
+      console.log(data1.name);
+    });
   }
 });
